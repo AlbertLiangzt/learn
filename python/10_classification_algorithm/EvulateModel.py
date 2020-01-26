@@ -119,6 +119,7 @@ def predict():
     return true_label_list, predict_label_list
 
 
+def evulate(TrueList, PredList):
 
 
 
@@ -126,4 +127,5 @@ def predict():
 
 
 loadModel()
-predict()
+TList,PList = predict()
+evulate()
