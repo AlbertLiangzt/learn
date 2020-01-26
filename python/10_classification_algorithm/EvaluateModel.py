@@ -19,6 +19,8 @@ DefaultPriorProb = {}
 # 读出模型中的数据
 # 文章类型 文章先验概率 词语默认概率 \n  词语id 最大似然估计(词语的先验概率)
 def loadModel():
+    global ArticlePriorProb
+    global DefaultPriorProb
     in_file = file(ModelFile, "r")
     in_file_line = in_file.readline().strip()
     items = in_file_line.split(" ")
@@ -60,6 +62,8 @@ def loadModel():
 
 # 预测
 def predict():
+    global ArticlePriorProb
+    global DefaultPriorProb
     true_label_list = []
     predict_label_list = []
 
@@ -119,13 +123,32 @@ def predict():
     return true_label_list, predict_label_list
 
 
-def evulate(TrueList, PredList):
+# 输出预测结果
+def output_result(origin_list, predict_list):
+    i = 0
+    outfile = file(ResultFile, 'w')
+    while i < len(origin_list):
+        outfile.write(str(origin_list[i]))
+        outfile.write(' ')
+        outfile.write(str(predict_list[i]))
+        outfile.write('\n')
+        i += 1
+    outfile.close()
 
-
-
-    outFile = file(ResultFile, "w")
+# 评估模型
+def evaluate(origin_list, predict_list):
+    accuracy = 0
+    i = 0
+    while i < len(origin_list):
+        if origin_list[i] == predict_list[i]:
+            accuracy += 1
+        i += 1
+    # 准确度
+    accuracy = float(accuracy) / float(len(origin_list))
+    print "Accuracy:", accuracy
 
 
 loadModel()
-TList,PList = predict()
-evulate()
+origin_list, predict_list = predict()
+output_result(origin_list, predict_list)
+evaluate(origin_list, predict_list)
