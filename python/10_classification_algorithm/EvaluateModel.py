@@ -60,6 +60,7 @@ def loadModel():
     in_file.close()
     print len(ArticlePriorProb), " classes! ", len(WordDic), "words!"
 
+
 # 预测
 def predict():
     global ArticlePriorProb
@@ -75,7 +76,7 @@ def predict():
     in_file_line = in_file.readline().strip()
     # 读取每一列数据class_id, word_id, word_id, word_id...
     # line_count = 0
-    while len(in_file_line) > 0 :
+    while len(in_file_line) > 0:
         pos = in_file_line.find("#")
         if pos > 0:
             in_file_line = in_file_line[:pos].strip()
@@ -97,7 +98,7 @@ def predict():
             score_dic[class_id] = math.log(ArticlePriorProb[class_id])
 
         for word in words:
-            if len(word) <1:
+            if len(word) < 1:
                 continue
             word_id = int(word)
 
@@ -105,7 +106,7 @@ def predict():
                 continue
             for class_id in ArticlePriorProb.keys():
                 if word_id not in WordPriorProb[class_id]:
-                    score_dic[class_id] += math.log(DefaultPriorProb[word_id])
+                    score_dic[class_id] += math.log(DefaultPriorProb[class_id])
                 else:
                     score_dic[class_id] += math.log(WordPriorProb[class_id][word_id])
 
@@ -134,6 +135,7 @@ def output_result(origin_list, predict_list):
         outfile.write('\n')
         i += 1
     outfile.close()
+
 
 # 评估模型
 def evaluate(origin_list, predict_list):
