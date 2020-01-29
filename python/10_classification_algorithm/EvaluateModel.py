@@ -63,6 +63,8 @@ def load_model():
 
 
 # 预测
+# 读取测试数据，进行预测
+# 原类型 预测类型 \n 原类型 预测类型
 def predict():
     global ArticlePriorProb
     global DefaultPriorProb
@@ -103,6 +105,7 @@ def predict():
                 continue
             word_id = int(word)
 
+            # 计算该篇文章中每个词语在各class_id的概率
             if word_id not in WordDic:
                 continue
             for class_id in ArticlePriorProb.keys():
@@ -112,7 +115,6 @@ def predict():
                     score_dic[class_id] += math.log(WordPriorProb[class_id][word_id])
 
         # 选出得分最高的class_id作为预测结果
-
         max_predict_score = max(score_dic.values())
         for class_id in score_dic.keys():
             if score_dic[class_id] == max_predict_score:
