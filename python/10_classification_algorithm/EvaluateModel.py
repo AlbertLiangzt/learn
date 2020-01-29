@@ -101,12 +101,13 @@ def predict():
         for class_id in ArticlePriorProb.keys():
             score_dic[class_id] = math.log(ArticlePriorProb[class_id])
 
+        # 每一个词，在每一个类型中，会有一个分数；把这些分数乘起来，就是每一篇文章对应每个类型的得分
         for word in words:
             if len(word) < 1:
                 continue
             word_id = int(word)
 
-            # 计算该篇文章中每个词语在各class_id的概率
+            # 计算该篇文章中每个词语在各class_id的概率——每一篇文章，对每一个类别都有一个分数
             if word_id not in WordDic:
                 continue
             for class_id in ArticlePriorProb.keys():
