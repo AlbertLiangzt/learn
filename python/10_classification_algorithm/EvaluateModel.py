@@ -64,7 +64,8 @@ def load_model():
 
 # 预测
 # 读取测试数据，进行预测
-# 原类型 预测类型 \n 原类型 预测类型
+# IN class_id word_id1 word_id2 word_id2 ... \n class_id word_id1 word_id2 word_id2 ...
+# OUT 原类型 预测类型 \n 原类型 预测类型
 def predict():
     global ArticlePriorProb
     global DefaultPriorProb
