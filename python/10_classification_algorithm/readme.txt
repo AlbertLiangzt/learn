@@ -23,8 +23,10 @@
 			2.2.2 求出该类文章中每个词语的先验概率
 		2.3 保存模型
 		
-		OUT	->	文章类型	文章先验概率	词语默认概率	文章类型
-				文章类型(未输出)	词语id	最大似然估计
+		OUT	->	文章类型	文章先验概率	词语默认概率	文章类型	文章先验概率	词语默认概率...
+				文章类型(未输出,每行都为一个文章类型)	词语id	最大似然估计
+				文章类型(未输出,每行都为一个文章类型)	词语id	最大似然估计
+				...
 
 
 	3.利用测试集，评估模型效果
@@ -34,9 +36,9 @@
 实现步骤
 	python DataConvert.py data/ nb_data
 
-	python NB.py 1 nb_data.train model
+	python GenerateModel.py nb_data.train model
 
-	python NB.py 0 nb_data.test model out
+	python NB.py 
 
 
 
