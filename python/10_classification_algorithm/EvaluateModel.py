@@ -5,20 +5,21 @@ import sys
 import os
 import math
 
-TestDataFile = "nb_data.test"
-ModelFile = "nb_data.model"
-ResultFile = "result"
-# TestDataFile = sys.argv[1]
-# ModelFile = sys.argv[2]
-# ResultFile = sys.argv[3]
+# TestDataFile = "nb_data.test"
+# ModelFile = "model"
+# ResultFile = "result"
+TestDataFile = sys.argv[1]
+ModelFile = sys.argv[2]
+ResultFile = sys.argv[3]
 WordDic = {}
 WordPriorProb = {}
 ArticlePriorProb = {}
 DefaultPriorProb = {}
 
+
 # 读出模型中的数据
 # 文章类型 文章先验概率 词语默认概率 \n  词语id 最大似然估计(词语的先验概率)
-def loadModel():
+def load_model():
     global ArticlePriorProb
     global DefaultPriorProb
     in_file = file(ModelFile, "r")
@@ -150,7 +151,7 @@ def evaluate(origin_list, predict_list):
     print "Accuracy:", accuracy
 
 
-loadModel()
+load_model()
 origin_list, predict_list = predict()
 output_result(origin_list, predict_list)
 evaluate(origin_list, predict_list)
