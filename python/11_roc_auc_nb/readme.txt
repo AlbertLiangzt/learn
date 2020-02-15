@@ -1,5 +1,5 @@
 评估方法：
-	混淆矩阵——PR，ROC，AUC
+	混淆矩阵——PR，ROC(Receiver Operating Characteristic curve接收者操作特征曲线)，AUC(Area Under Curve ROC曲线下的面积)
 
 ROC结果
 无图形	cat auc.raw | sort -t$'\t' -k2g  | awk -F'\t' '($1==-1){++x;a+=y}($1==1){++y}END{print 1.0 - a/(x*y)}'
