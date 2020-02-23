@@ -14,3 +14,11 @@ import matplotlib.pyplot as plt
 Input = file2matrix("testSet.txt","\t")
 target = Input[:,-1] #获取分类标签列表
 [m,n] = shape(Input)
+
+# 按分类绘制散点图
+drawScatterbyLabel(plt,Input)
+
+# 构建x+b 系数矩阵：b这里默认为1
+dataMat = buildMat(Input)
+alpha = 0.001 # 步长
+steps = 500  # 迭代次数
