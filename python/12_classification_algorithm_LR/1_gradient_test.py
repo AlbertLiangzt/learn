@@ -22,3 +22,16 @@ drawScatterbyLabel(plt,Input)
 dataMat = buildMat(Input)
 alpha = 0.001 # 步长
 steps = 500  # 迭代次数
+
+weights = ones((n,1))# 初始化权重向量
+
+# 主程序
+for k in xrange(steps):
+    # wx
+    gradient = dataMat*mat(weights)
+    # sigmoid(wx)
+    output = logistic(gradient)  # logistic function
+    errors = target-output # 计算误差
+    weights = weights + alpha*dataMat.T*errors
+
+print weights # 输出权重
