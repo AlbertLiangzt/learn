@@ -35,3 +35,9 @@ for k in xrange(steps):
     weights = weights + alpha*dataMat.T*errors
 
 print weights # 输出权重
+
+X = np.linspace(-5,5,100)
+#y=w*x+b: b:weights[0]/weights[2]; w:weights[1]/weights[2]
+Y = -(double(weights[0])+X*(double(weights[1])))/double(weights[2])
+plt.plot(X,Y)
+plt.show()
