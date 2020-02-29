@@ -39,3 +39,13 @@ prediction=𝜂(wx)
 f(x)=sigmoid(wx)=𝜂(wx)
 w1：随机初始化——>f(x) ：预测值
 
+
+
+python 1_gradient_calculate.py
+	计算模型
+python 2_weight_list.py
+	将每步的权重记录下来，并在散点图上展示
+python 3_weight_change.py
+	画出权重变化曲线
+python 4_predict.py
+	给定数据，预测结果
