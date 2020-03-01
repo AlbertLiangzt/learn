@@ -34,11 +34,10 @@ sifmoid函数——逻辑回归的实现——推导出来的函数与SIGMOD函�
 目标：
 误差=真实值-预测值=(yi-𝜂(wxi))
 errors = target - prediction
-prediction=𝜂(wx)
-
-f(x)=sigmoid(wx)=𝜂(wx)
+prediction=sigmoid(wx)=𝜂(wx)
+wx=weight * x + b
 w1：随机初始化——>f(x) ：预测值
-
+(详细公式见formula.png)
 
 
 python 1_gradient_calculate.py
