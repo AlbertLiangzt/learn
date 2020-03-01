@@ -48,3 +48,19 @@ python 3_weight_change.py
 	画出权重变化曲线
 python 4_predict.py
 	给定数据，预测结果
+python 5_SGD.py
+	SGD计算
+
+-------------------------
+BGD (Batch Gradient Descent批量梯度下降)	
+优点：每次迭代遍历所有样本，共同决定最优方向
+缺点：样本数量大时，耗时大、占用内存大
+
+SGD (Stochastic Gradient Descent随机梯度下降)
+  每次从训练样本中抽取一个样本进行更新，每次都不用遍历所有数据
+优点：迭代速度快
+缺点：需要迭代更多次数、每次选取方向不一定是最优
+
+MBGD(Mini-batch Gradient Descent小批量梯度下降法)
+每次随机选取大小batch_size的子集进行批量训练
+节省时间，更加准确
