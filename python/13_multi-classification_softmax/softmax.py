@@ -15,10 +15,11 @@ class Softmax(object):
     def __init__(self):
         self.learning_step = 0.000001  # 学习速率
         self.max_iteration = 1000  # 最大迭代次数
+        self.weight_lambda = 0.01  # 衰退权重
 
     def train(self, features, labels):
         self.k = len(set(labels))
-        self.w = np.zeros(self.k, len(features[0] + 1))
+        self.w = np.zeros((self.k, len(features[0]) + 1))
 
         time = 0
         while time < self.max_iteration:
@@ -37,6 +38,49 @@ class Softmax(object):
 
             for j in range(self.k):
                 self.w[j] -= self.learning_step * derivatives[j]
+
+    def predict(self, features):
+        labels = []
+        for feature in features:
+            x = list(feature)
+            x.append(1)
+
+            x = np.matrix(x)
+            x = np.transpose(x)
+
+            labels.append(self.predict_(x))
+        return labels
+
+    def cal_partial_derivative(self, x, y, j):
+        first = int(y == j)  # 计算示性函数
+        second = self.cal_probability(x, j)  # 计算后面那个概率
+
+        # return -x*(first-second)
+        # return -x*(first-second) + self.weight_lambda*abs(self.w[j])
+        # return -x*(first-second) + self.weight_lambda*self.w[j]*self.w[j]
+        return -x * (first - second) + self.weight_lambda * self.w[j] * self.w[j] + self.weight_lambda * abs(self.w[j])
+
+    def cal_probability(self, x, j):
+        molecule = self.cal_e(x, j)
+        denominator = sum([self.cal_e(x, i) for i in range(self.k)])
+
+        return molecule / denominator
+
+    def cal_e(self, x, l):
+        theta_l = self.w[l]
+        product = np.dot(theta_l, x)
+
+        return math.exp(product)
+
+    def predict_(self, x):
+        result = np.dot(self.w, x)
+        row, column = result.shape
+
+        # 找最大值所在的列
+        _positon = np.argmax(result)
+        m, n = divmod(_positon, column)
+
+        return m
 
 
 if __name__ == '__main__':
@@ -60,4 +104,12 @@ if __name__ == '__main__':
     p = Softmax()
     p.train(train_features, train_labels)
 
+    print('Start predicting')
+    test_predict = p.predict(test_features)
 
+    print
+    p.w.shape
+    # print p.w[0]
+
+    score = accuracy_score(test_labels, test_predict)
+    print("The accruacy socre is " + str(score))
