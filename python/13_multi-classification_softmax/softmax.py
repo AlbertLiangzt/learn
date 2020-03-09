@@ -18,7 +18,7 @@ class Softmax(object):
         self.weight_lambda = 0.01  # 衰退权重
 
     def train(self, features, labels):
-        self.k = len(set(labels))
+        self.k = len(set(labels))  # 去重，类别的总数
         self.w = np.zeros((self.k, len(features[0]) + 1))
 
         time = 0
@@ -34,7 +34,11 @@ class Softmax(object):
             x.append(1.0)
             x = np.array(x)
 
-            derivatives = [self.cal_partial_derivative(x, y, j) for j in range(self.k)]
+            # 梯度公式
+            # 每一个label对应的梯度
+            derivatives = []
+            for j in range(self.k):
+                derivatives.append(self.cal_partial_derivative(x, y, j))
 
             for j in range(self.k):
                 self.w[j] -= self.learning_step * derivatives[j]
@@ -56,16 +60,18 @@ class Softmax(object):
         second = self.cal_probability(x, j)  # 计算后面那个概率
 
         # return -x*(first-second)
-        # return -x*(first-second) + self.weight_lambda*abs(self.w[j])
-        # return -x*(first-second) + self.weight_lambda*self.w[j]*self.w[j]
+        # return -x*(first-second) + self.weight_lambda*abs(self.w[j]) # L1:|w|范数 lasso
+        # return -x*(first-second) + self.weight_lambda*self.w[j]*self.w[j] #L2: |w^2|范数 ridge
         return -x * (first - second) + self.weight_lambda * self.w[j] * self.w[j] + self.weight_lambda * abs(self.w[j])
 
+    # x的分类为类别j的概率为
     def cal_probability(self, x, j):
         molecule = self.cal_e(x, j)
         denominator = sum([self.cal_e(x, i) for i in range(self.k)])
 
         return molecule / denominator
 
+    # 内积
     def cal_e(self, x, l):
         theta_l = self.w[l]
         product = np.dot(theta_l, x)
