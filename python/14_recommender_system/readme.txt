@@ -1,8 +1,11 @@
 推荐系统
 1、数据预处理
 	1.1用户画像数据
+		user_profile.data
 	1.2物品元数据
+		music_meta
 	1.3用户行为数据
+		user_watch_pref.sml
 2、【召回】CB算法
 3、【召回】CF算法
 4、【排序】Sklearn
