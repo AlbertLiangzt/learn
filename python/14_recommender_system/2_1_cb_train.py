@@ -84,7 +84,7 @@ with open(input_file, "r") as fd:
         for k, v in token_dic.items():
             token = k.strip()
             score = str(v)
-            out_file.write(",".join([token, itemid, score]))
+            out_file.write("\t".join([token, itemid, score]))
             out_file.write("\n")
 
 out_file.close()
