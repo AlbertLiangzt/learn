@@ -13,14 +13,16 @@ data.rar需要先解压
 2、【召回】CB算法
 	2.1token itemid score形式整理训练数据——利用jieba分词，对item name进行中文分词
 		IN->	1_merge.data
-		OUT->	name1_1	userid_1	score1
-			name1_2	userid_1	score2
-			desc1_1	userid_1	score3
-			desc1_2	userid_1	score4
-			tag1	userid_1	score5
-	2.2协同过滤（详看09_recommendation_algorithm），得到item-item
+		OUT->	name1_1	itemid_1	score1
+			name1_2	itemid_1	score2
+			desc1_1	itemid_1	score3
+			desc1_2	itemid_1	score4
+			tag1	itemid_1	score5
+	2.2协同过滤（详看09_recommendation_algorithm），得到item-item的相似度
+		IN ->	token itemid score
+		OUT->	itemid_1 itemid_2 simlar_score
 3、【召回】CF算法
 4、【排序】Sklearn
 
 python 1_merge_meta.py
-pyrhon 2_1_cb_itrains.py
+pyrhon 2_1_cb_trains.py
