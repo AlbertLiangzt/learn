@@ -1,0 +1,3 @@
+将2_1_cb_train得到的结果
+在09_recommendation_algorithm/run.sh执行
+得到两个id的相似度
