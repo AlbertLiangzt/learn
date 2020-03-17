@@ -6,6 +6,7 @@ output_file = "./data/2_3_cb_redis.data"
 
 out_file = open(output_file, "w")
 
+MAX_SIMILAR_SIZE = 100
 item_dic = {}
 PRE_STR = "CB_"
 
@@ -22,7 +23,7 @@ with open(input_file, "r") as fd:
 for k, v in item_dic.items():
     key = PRE_STR + k
 
-    list = sorted(v, key=lambda x: x[1], reverse=True)[:100] # 取第二列降序
+    list = sorted(v, key=lambda x: x[1], reverse=True)[:MAX_SIMILAR_SIZE] # 取第二列降序
     val = '_'.join([':'.join([str(temp[0]), str(round(float(temp[1]), 6))]) for temp in list])
 
     out_file.write(" ".join(['SET', key, val]))
