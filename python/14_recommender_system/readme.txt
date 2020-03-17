@@ -10,7 +10,7 @@ data.rar需要先解压
 		user_watch_pref.sml	userid, itemid, listen_time, click_time
     OUT->	合并后数据
 		1_merge.data	userid, itemid, listen_time, click_time, gender, age, salary, location, name, desc, time, language, tag
-2、【召回】CB算法
+2、【召回】CB算法(CB,Content-based Recommendations)
 	2.1token itemid score形式整理训练数据——利用jieba分词，对item name进行中文分词
 		IN->	1_merge.data
 		OUT->	name1_1	itemid_1	score1
@@ -24,9 +24,20 @@ data.rar需要先解压
 	2.3数据格式化
 		IN->	itemid_1 itemid_2 simlar_score
 		OUT->	item_1 -> item_2:score1_item3:score2
-3、【召回】CF算法
+3、【召回】CF算法(User CF,User based Collaborative Filtering)
+	3.1以userid itemid score形式整理训练数据
+		IN->	1_merge.data
+		OUT->	userid	itemid	score
+	3.2协同过滤，得到基于cf的item-item的相似度（同2.2）
+		IN->	userid	itemid	score
+		OUT->	itemid_1 itemid_2 simlar_score
+	3.3数据格式化（同2.3）
+		IN->	itemid_1 itemid_2 simlar_score
+		OUT->	item_1 -> item_2:score1_item3:score2
 4、【排序】Sklearn
 
 python 1_merge_meta.py
 pyrhon 2_1_cb_trains.py
 python 2_3_cb_format_redis.py
+python 3_1_cf_train.py
+python 3_3_cf_format_redis.py
