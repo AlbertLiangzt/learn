@@ -42,12 +42,15 @@ data.rar需要先解压
 		3.4.2用unix2dos（格式转换）
 4、【排序】Sklearn
 
-python 1_merge_meta.py
-
-pyrhon 2_1_cb_trains.py
-python 2_3_cb_format_redis.py
-cat cb_reclist.redis | /usr/local/src/redis-2.8.3/src/redis-cli --pipe
-
-python 3_1_cf_train.py
-python 3_3_cf_format_redis.py
-cat cf_reclist.redis | /usr/local/src/redis-2.8.3/src/redis-cli --pipe
+step1
+	python 1_merge_meta.py
+step2
+	pyrhon 2_1_cb_trains.py
+	python 2_3_cb_format_redis.py
+	cat cb_reclist.redis | /usr/local/src/redis-2.8.3/src/redis-cli --pipe
+step3
+	python 3_1_cf_train.py
+	python 3_3_cf_format_redis.py
+	cat cf_reclist.redis | /usr/local/src/redis-2.8.3/src/redis-cli --pipe
+step4
+	
