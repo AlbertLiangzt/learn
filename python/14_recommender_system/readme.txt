@@ -41,6 +41,10 @@ data.rar需要先解压
 		3.4.1（本地测试）启动redis服务，另起终端，连接服务
 		3.4.2用unix2dos（格式转换）
 4、【排序】Sklearn
+	label_list:每个样本的label标签
+	fea_row_list:样本行信息
+	fea_col_list:样本列信息
+	data_list:存储真实数据
 
 step1
 	python 1_merge_meta.py
