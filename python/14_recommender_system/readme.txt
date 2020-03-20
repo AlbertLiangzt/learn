@@ -27,6 +27,7 @@ data.rar需要先解压
 	2.4灌数据——格式化后的数据写入redis
 		2.4.1（本地测试）启动redis服务，另起终端，连接服务
 		2.4.2用unix2dos（格式转换）
+		2.4.3将数据通过管道灌进redis
 3、【召回】CF算法(User CF,User based Collaborative Filtering)
 	3.1以userid itemid score形式整理训练数据
 		IN->	1_merge.data
@@ -40,6 +41,7 @@ data.rar需要先解压
 	3.4灌数据——格式化后的数据写入redis（同2.4）
 		3.4.1（本地测试）启动redis服务，另起终端，连接服务
 		3.4.2用unix2dos（格式转换）
+		3.4.3将数据通过管道灌进redis
 4、【排序】Sklearn
 	label_list:每个样本的label标签
 	fea_row_list:样本行信息
