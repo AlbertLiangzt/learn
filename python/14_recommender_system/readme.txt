@@ -53,10 +53,10 @@ step1
 step2
 	python 2_1_cb_trains.py
 	python 2_3_cb_format_redis.py
-	cat cb_reclist.redis | /usr/local/src/redis-2.8.3/src/redis-cli --pipe
+	cat 2_3_cb_redis.data | /usr/local/src/redis-2.8.3/src/redis-cli --pipe
 step3
 	python 3_1_cf_train.py
 	python 3_3_cf_format_redis.py
-	cat cf_reclist.redis | /usr/local/src/redis-2.8.3/src/redis-cli --pipe
+	cat 3_3_cf_redis.data | /usr/local/src/redis-2.8.3/src/redis-cli --pipe
 step4
 	
