@@ -51,7 +51,7 @@ data.rar需要先解压
 step1
 	python 1_merge_meta.py
 step2
-	pyrhon 2_1_cb_trains.py
+	python 2_1_cb_trains.py
 	python 2_3_cb_format_redis.py
 	cat cb_reclist.redis | /usr/local/src/redis-2.8.3/src/redis-cli --pipe
 step3
