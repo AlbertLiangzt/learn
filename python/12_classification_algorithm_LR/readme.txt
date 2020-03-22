@@ -1,4 +1,4 @@
-二分类(LR)：model -> 0/1
+二分类(Logistic Regression 逻辑斯谛回归 简称LR)：model -> 0/1
 多分类(Softmax)：model -> 0/1/2...
 
 评估方式：PR曲线——确定阈值（人工设定）
