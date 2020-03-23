@@ -27,6 +27,7 @@ data.rar需要先解压
 	2.4灌数据——格式化后的数据写入redis
 		2.4.1（本地测试）启动redis服务，另起终端，连接服务
 		2.4.2用unix2dos（格式转换）
+			unix2dos 2_3_cb_redis.data
 		2.4.3将数据通过管道灌进redis
 3、【召回】CF算法(User CF,User based Collaborative Filtering)
 	3.1以userid itemid score形式整理训练数据
@@ -41,12 +42,25 @@ data.rar需要先解压
 	3.4灌数据——格式化后的数据写入redis（同2.4）
 		3.4.1（本地测试）启动redis服务，另起终端，连接服务
 		3.4.2用unix2dos（格式转换）
+			unix2dos 3_3_cf_redis.data 
 		3.4.3将数据通过管道灌进redis
 4、【排序】Sklearn
 	label_list:每个样本的label标签
 	fea_row_list:样本行信息
 	fea_col_list:样本列信息
 	data_list:存储真实数据
+
+	1.将基础信息进行处理
+		1.1 用户特征
+			userid	gender:weight_1 age:weight_2
+		1.2 物品特征
+			itemid	token_1:score_1 token_2:score_2...
+		1.3 生成样本信息
+			label gender:weight_1 age:weight_2 token_1:score_1 token_2:score_2
+		1.4 生成样本id-name映射字典
+			itemid	name
+	2.评估模型
+
 
 step1
 	python 1_merge_meta.py
