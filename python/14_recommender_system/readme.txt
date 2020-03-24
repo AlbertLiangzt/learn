@@ -52,11 +52,11 @@ data.rar需要先解压
 
 	1.将基础信息进行处理
 		1.1 用户特征
-			userid	gender:weight_1 age:weight_2
+			userid	gender:weight_1	age:weight_2
 		1.2 物品特征
-			itemid	token_1:score_1 token_2:score_2...
+			itemid	token_1:score_1	token_2:score_2...
 		1.3 生成样本信息
-			label gender:weight_1 age:weight_2 token_1:score_1 token_2:score_2
+			label gender:weight_1	age:weight_2	token_1:score_1	token_2:score_2
 		1.4 生成样本id-name映射字典
 			itemid	name
 	2.评估模型
