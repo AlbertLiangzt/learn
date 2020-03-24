@@ -120,7 +120,10 @@ for name, token_score_list in item_token_score_dic.items():
     item_feature_dic[name] = " ".join(tokenid_score_list)
 
 out_item_feature_file = open(output_item_feature, "w")
-for itemid, item_feature in item_feature_dic.items():
+for name, item_feature in item_feature_dic.items():
+    if name not in item_name_to_id:
+        continue
+    itemid = item_name_to_id[name]
     out_item_feature_file.write("\t".join([itemid, item_feature]))
     out_item_feature_file.write("\n")
 out_item_feature_file.close()
