@@ -137,13 +137,13 @@ for label, user_feature, item_feature in base_sample_list:
     if name not in item_feature_dic:
         continue
 
-    out_final_samples_file.write(" ".join([label, user_feature_dic[userid], item_feature_dic[name]]))
+    out_final_samples_file.write("\t".join([label, user_feature_dic[userid], item_feature_dic[name]]))
     out_final_samples_file.write("\n")
 out_final_samples_file.close()
 
 # step4 生成id-name映射字典
 out_item_id_to_name_file = open(output_item_id_to_name, "w")
-for id, name in item_name_to_id.items():
+for id, name in item_id_to_name.items():
     out_item_id_to_name_file.write("\t".join([id, name]))
-    out_item_id_to_name_file.write("\t")
+    out_item_id_to_name_file.write("\n")
 out_item_id_to_name_file.close()
