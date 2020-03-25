@@ -45,22 +45,19 @@ data.rar需要先解压
 			unix2dos 3_3_cf_redis.data 
 		3.4.3将数据通过管道灌进redis
 4、【排序】Sklearn
-	label_list:每个样本的label标签
-	fea_row_list:样本行信息
-	fea_col_list:样本列信息
-	data_list:存储真实数据
-
 	1.将基础信息进行处理
 		1.1 用户特征
 			userid	gender:weight_1	age:weight_2
 		1.2 物品特征
 			itemid	token_1:score_1	token_2:score_2...
 		1.3 生成样本信息
-			label gender:weight_1	age:weight_2	token_1:score_1	token_2:score_2
+			label	gender:weight_1	age:weight_2	token_1:score_1	token_2:score_2...
 		1.4 生成样本id-name映射字典
 			itemid	name
-	2.评估模型
-
+	2.评估模型LR
+		IN->	label	gender:weight_1	age:weight_2	token_1:score_1	token_2:score_2
+		OUT->	w, g
+		
 
 step1
 	python 1_merge_meta.py
@@ -73,4 +70,5 @@ step3
 	python 3_3_cf_format_redis.py
 	cat 3_3_cf_redis.data | /usr/local/src/redis-2.8.3/src/redis-cli --pipe
 step4
+	python 4_1_gen_samples.py
 	
