@@ -11,6 +11,8 @@ label_list = []
 score_list = []
 with open(inputfile, 'r') as fd:
     for line in fd:
+		if len(fs) != 2:
+            continue
         fs = line.strip().split('	')
         label = int(fs[0])
         score = float(fs[1])
