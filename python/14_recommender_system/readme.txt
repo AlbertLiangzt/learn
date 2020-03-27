@@ -64,7 +64,7 @@ data.rar需要先解压
 		OUT->	auc.data
 	4.3评估模型(详见11_roc_auc_nb)
 		IN->	label	prediction
-		OUT->	roc\auc
+		OUT->	roc/auc
 		
 
 step1
