@@ -10,7 +10,8 @@ input_file = "./data/4_1_samples.data"
 output_true_label_file = "./data/4_2_True_label.data"
 output_pre_label_file = "./data/4_2_Predict_label.data"
 output_auc_data = "./data/4_2_auc.data"
-
+output_model_w = "./data/4_2_model.w"
+output_model_b = "./data/4_2_model.b"
 
 # label	gender:weight_1	age:weight_2	token_1:score_1	token_2:score_2
 def load_data():
@@ -61,8 +62,8 @@ def main():
     model = LogisticRegression(penalty='l1')
     model.fit(x_train, y_train)
 
-    ff_w = open('model.w', 'w')
-    ff_b = open('model.b', 'w')
+    ff_w = open(output_model_w, 'w')
+    ff_b = open(output_model_b, 'w')
 
     for w_list in model.coef_:
         for w in w_list:
