@@ -63,7 +63,8 @@ class index:
                 model_b = float(ss[2].strip)
 
         # step 3:检索候选
-        rec_item_merge = []
+        req_item_merge = []
+
         # step 3.1:cf
         cf_info = "null"
         key = "_".join(["CF", req_itemid])
@@ -73,17 +74,62 @@ class index:
         if len(cf_info) > 6:
             for cf_item_info in cf_info.strip().split("_"):
                 item, score = cf_item_info.strip().split(":")
-                rec_item_merge.append(item)
-                
+                req_item_merge.append(item)
+
         # step 3.2:cb
         cb_info = "null"
         key = "_".join(["CB", req_itemid])
         if r.exists(key):
             cb_info = r.get(key)
-        if len(cb_info) >6:
+        if len(cb_info) > 6:
             for cb_item_info in cb_info.strip().split("_"):
-                item,score = cb_item_info.strip().split(":")
-                rec_item_merge.append(item)
+                item, score = cb_item_info.strip().split(":")
+                req_item_merge.append(item)
+
+        # step 4:获取用户特征
+        user_features = ""
+        if userid in user_feature_dict:
+            user_features = user_feature_dict[userid]
+
+        req_user_feature_dict = {}
+        for user_fea_index in user_features.strip().split(" "):
+            ss = user_fea_index.strip().split(":")
+            if len(ss) != 2:
+                continue
+            fea = int(ss[0].strip())
+            score = float(ss[1].strip)
+            req_user_feature_dict[fea] = score
+
+        # step 5:获取物品特征
+        return_score_list = []
+        for item in req_item_merge:
+            if itemid in item_feature_dict:
+                item_features = item_feature_dict[itemid]
+
+                req_item_feature_dict = {}
+                for item_fea_index in item_features.strip().split(" "):
+                    ss = item_fea_index.strip().split(":")
+                    if len(ss) != 2:
+                        continue
+                    fea = int(ss[0].strip())
+                    score = float(ss[1].strip)
+                    req_item_feature_dict[fea] = score
+
+                wx_score = 0.
+                # y = wx
+                for fea, score in dict(req_user_feature_dict.items() + req_item_feature_dict.items()).items():
+                    wx_score += (score * model_w_list[fea])
+                # sigmoid : 1 / (1+exp(-wx))
+                final_score = 1 / (1 + math.exp(wx_score + model_b))
+                return_score_list.append((itemid, final_score))
+
+        # step 6: 排序rank
+        return_score_list = sorted(return_score_list, key=lambda  x:x[1], reverse=True)
+
+        # step 7:过滤filter
+        filter_score_list = return_score_list[:10]
+        
+
 
 class test:
     def GET(self):
