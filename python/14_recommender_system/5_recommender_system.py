@@ -7,6 +7,7 @@ import math
 
 user_feature_file = ("./data/4_1_user_feature.data")
 item_feature_file = ("./data/4_1_item_feature.data")
+item_id_name_file = "./data/4_1_item_id_to_name.data"
 model_w_file = ("./data/4_2_model.w")
 model_b_file = ("./data/4_2_model.b")
 
@@ -128,7 +129,16 @@ class index:
 
         # step 7:过滤filter
         filter_score_list = return_score_list[:10]
+
+        # step 8:数据包装
+        item_dict = {}
+        with open(item_id_name_file, "r") as fd:
+            for line in fd:
+                item_id, item_name = line.strip().split("\t")
+                item_dict[itemid] = item_name
+
         
+
 
 
 class test:
