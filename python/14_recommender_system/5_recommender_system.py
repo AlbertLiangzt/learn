@@ -125,7 +125,7 @@ class index:
                 return_score_list.append((itemid, final_score))
 
         # step 6: 排序rank
-        return_score_list = sorted(return_score_list, key=lambda  x:x[1], reverse=True)
+        return_score_list = sorted(return_score_list, key=lambda x: x[1], reverse=True)
 
         # step 7:过滤filter
         filter_score_list = return_score_list[:10]
@@ -137,8 +137,16 @@ class index:
                 item_id, item_name = line.strip().split("\t")
                 item_dict[itemid] = item_name
 
-        
+        ret_list = []
+        for tup in filter_score_list:
+            req_item_name = item_dict[req_itemid]
+            item_name = item_dict[tup[0]]
+            item_rank_score = str(tup[1])
+            ret_list.append(" -> ".join([req_item_name, item_name, item_rank_score]))
 
+        ret = "\n".join(ret_list)
+
+        return ret
 
 
 class test:
