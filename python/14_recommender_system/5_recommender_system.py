@@ -1,7 +1,7 @@
 #!/usr/local/python/bin
 # --coding:utf-8--
 
-import web
+import recsys_test.rec_server.web
 import redis
 import math
 
@@ -16,7 +16,7 @@ urls = (
     '/test', 'test',
 )
 
-app = web.application(urls, globals())
+app = recsys_test.rec_server.web.application(urls, globals())
 
 # load user feature
 user_feature_dict = {}
@@ -44,7 +44,7 @@ class index:
         r = redis.Redis(host='master', port=6379, db=0)
 
         # sterp 1:解析请求
-        params = web.input()
+        params = recsys_test.rec_server.web.input()
         req_userid = params.get("userid", "")
         req_itemid = params.get("itemid", "")
 
@@ -136,14 +136,14 @@ class index:
         with open(item_id_name_file, "r") as fd:
             for line in fd:
                 item_id, item_name = line.strip().split("\t")
-                item_dict[itemid] = item_name
+                item_dict[item_id] = item_name
 
         ret_list = []
         for tup in filter_score_list:
-            req_item_name = item_dict[req_itemid]
+            req_item_name_return = item_dict[req_itemid]
             item_name = item_dict[tup[0]]
             item_rank_score = str(tup[1])
-            ret_list.append(" -> ".join([req_item_name, item_name, item_rank_score]))
+            ret_list.append(" -> ".join([req_item_name_return, item_name, item_rank_score]))
 
         ret = "\n".join(ret_list)
 
@@ -152,7 +152,7 @@ class index:
 
 class test:
     def GET(self):
-        print web.input()
+        print recsys_test.rec_server.web.input()
         return '222'
 
 
