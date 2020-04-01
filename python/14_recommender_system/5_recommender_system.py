@@ -5,11 +5,11 @@ import web
 import redis
 import math
 
-user_feature_file = ("./data/4_1_user_feature.data")
-item_feature_file = ("./data/4_1_item_feature.data")
+user_feature_file = "./data/4_1_user_feature.data"
+item_feature_file = "./data/4_1_item_feature.data"
 item_id_name_file = "./data/4_1_item_id_to_name.data"
-model_w_file = ("./data/4_2_model.w")
-model_b_file = ("./data/4_2_model.b")
+model_w_file = "./data/4_2_model.w"
+model_b_file = "./data/4_2_model.b"
 
 urls = (
     '/', 'index',
@@ -30,7 +30,7 @@ with open(user_feature_file, "r") as fd:
 
 # load item feature
 item_feature_dict = {}
-with open(item_feature_file, "r"):
+with open(item_feature_file, "r") as fd:
     for line in fd:
         ss = line.strip().split("\t")
         if len(ss) != 2:
@@ -50,18 +50,19 @@ class index:
 
         # step 2:加载模型
         model_w_list = []
+        model_b = 0
         with open(model_w_file, "r") as fd:
             for line in fd:
                 ss = line.strip().split(" ")
                 if len(ss) != 3:
                     continue
                 model_w_list.append(float(ss[2].strip()))
-        with open(model_b_file, "\t") as fd:
+        with open(model_b_file, "r") as fd:
             for line in fd:
                 ss = line.strip().split(" ")
                 if ss != 3:
                     continue
-                model_b = float(ss[2].strip)
+                model_b = float(ss[2].strip())
 
         # step 3:检索候选
         req_item_merge = []
@@ -89,8 +90,8 @@ class index:
 
         # step 4:获取用户特征
         user_features = ""
-        if userid in user_feature_dict:
-            user_features = user_feature_dict[userid]
+        if req_userid in user_feature_dict:
+            user_features = user_feature_dict[req_userid]
 
         req_user_feature_dict = {}
         for user_fea_index in user_features.strip().split(" "):
@@ -98,12 +99,12 @@ class index:
             if len(ss) != 2:
                 continue
             fea = int(ss[0].strip())
-            score = float(ss[1].strip)
+            score = float(ss[1].strip())
             req_user_feature_dict[fea] = score
 
         # step 5:获取物品特征
         return_score_list = []
-        for item in req_item_merge:
+        for itemid in req_item_merge:
             if itemid in item_feature_dict:
                 item_features = item_feature_dict[itemid]
 
@@ -113,7 +114,7 @@ class index:
                     if len(ss) != 2:
                         continue
                     fea = int(ss[0].strip())
-                    score = float(ss[1].strip)
+                    score = float(ss[1].strip())
                     req_item_feature_dict[fea] = score
 
                 wx_score = 0.
