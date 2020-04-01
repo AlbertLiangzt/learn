@@ -1,7 +1,7 @@
 #!/usr/local/python/bin
 # --coding:utf-8--
 
-import recsys_test.rec_server.web
+import web
 import redis
 import math
 
@@ -16,7 +16,7 @@ urls = (
     '/test', 'test',
 )
 
-app = recsys_test.rec_server.web.application(urls, globals())
+app = web.application(urls, globals())
 
 # load user feature
 user_feature_dict = {}
@@ -44,7 +44,7 @@ class index:
         r = redis.Redis(host='master', port=6379, db=0)
 
         # sterp 1:解析请求
-        params = recsys_test.rec_server.web.input()
+        params = web.input()
         req_userid = params.get("userid", "")
         req_itemid = params.get("itemid", "")
 
@@ -152,7 +152,7 @@ class index:
 
 class test:
     def GET(self):
-        print recsys_test.rec_server.web.input()
+        print web.input()
         return '222'
 
 
