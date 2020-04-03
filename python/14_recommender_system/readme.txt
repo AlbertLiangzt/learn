@@ -1,6 +1,6 @@
 data.rar需要先解压
 
-推荐系统
+推荐系统数据处理流程
 1、数据预处理——过滤数据、合并数据
     IN->	用户画像数据
 		user_profile.data	userid, gender, age, salary, location
@@ -58,7 +58,7 @@ data.rar需要先解压
 			OUT->itemid	name
 	4.2训练数据LR
 		IN->	label	gender:weight_1	age:weight_2	token_1:score_1	token_2:score_2
-		OUT->	w, b
+		OUT->	model.w, model.b
 		OUT->	true label
 		OUT->	predict label
 		OUT->	auc.data
@@ -81,4 +81,21 @@ step4
 	python 4_1_gen_samples.py
 	python 4_2_lr_auc.py
 	python 4_3_plot_roc.py
-	
+
+
+推荐系统实现流程
+	1.解析请求：userid itemid（post、get）
+	2.加载模型：加载排序模型model.w, model.b
+	3.检索候选集合：利用cb、cf检索redis数据库
+	4.获取用户特征：userid 4_1_user_feature.data
+	5.获取物品特征：itemid 4_1_item_feature.data
+	6.打分（逻辑回归、深度学习）、排序
+	7.top-n过滤
+	8.数据包装（itemid->name）、返回
+
+step5
+	get请求
+	python 5_recommender_system.py 9999
+	http://192.168.224.10:9999/?userid=00370d83b51febe3e8ae395afa95c684&itemid=3880409156
+	post请求
+	python 5_recommender_system_post.py 9999
