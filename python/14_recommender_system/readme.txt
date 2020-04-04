@@ -99,3 +99,4 @@ step5
 	http://192.168.224.10:9999/?userid=00370d83b51febe3e8ae395afa95c684&itemid=3880409156
 	post请求
 	python 5_recommender_system_post.py 9999
+	http://192.168.224.10:9999/
