@@ -41,7 +41,7 @@ with open(item_feature_file, "r") as fd:
 
 class index:
     def GET(self):
-        r = redis.Redis(host='master', port=6379, db=0)
+        r = redis.Redis(host="master", port=6379, db=0)
 
         # sterp 1:解析请求
         params = web.input()
@@ -57,10 +57,11 @@ class index:
                 if len(ss) != 3:
                     continue
                 model_w_list.append(float(ss[2].strip()))
+
         with open(model_b_file, "r") as fd:
             for line in fd:
                 ss = line.strip().split(" ")
-                if ss != 3:
+                if len(ss) != 3:
                     continue
                 model_b = float(ss[2].strip())
 
@@ -83,6 +84,7 @@ class index:
         key = "_".join(["CB", req_itemid])
         if r.exists(key):
             cb_info = r.get(key)
+
         if len(cb_info) > 6:
             for cb_item_info in cb_info.strip().split("_"):
                 item, score = cb_item_info.strip().split(":")
