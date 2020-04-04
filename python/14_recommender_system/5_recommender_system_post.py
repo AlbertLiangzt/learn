@@ -4,6 +4,7 @@
 import web
 import redis
 import math
+import json
 
 user_feature_file = "./data/4_1_user_feature.data"
 item_feature_file = "./data/4_1_item_feature.data"
@@ -16,6 +17,14 @@ urls = (
     '/test', 'test',
 )
 
+render = web.template.render("templates/")
+web.template.Template.globals["render"] = render
+
+config = web.storage(
+    static="/static",
+    resource="/resource"
+)
+web.template.Template.globals["config"] = config
 app = web.application(urls, globals())
 
 # load user feature
@@ -41,12 +50,18 @@ with open(item_feature_file, "r") as fd:
 
 class index:
     def GET(self):
-        r = redis.Redis(host='master', port=6379, db=0)
+        ret = '111'
+
+        return render.index("null", "null", "100", "")
+
+    def POST(self):
+        r = redis.Redis(host="master", port=6379, db=0)
 
         # sterp 1:解析请求
         params = web.input()
-        req_userid = params.get("userid", "")
-        req_itemid = params.get("itemid", "")
+        content = params["reqRes"]
+
+        req_userid, req_itemid = content.strip().split("_")
 
         # step 2:加载模型
         model_w_list = []
@@ -57,10 +72,11 @@ class index:
                 if len(ss) != 3:
                     continue
                 model_w_list.append(float(ss[2].strip()))
+
         with open(model_b_file, "r") as fd:
             for line in fd:
                 ss = line.strip().split(" ")
-                if ss != 3:
+                if len(ss) != 3:
                     continue
                 model_b = float(ss[2].strip())
 
@@ -83,6 +99,7 @@ class index:
         key = "_".join(["CB", req_itemid])
         if r.exists(key):
             cb_info = r.get(key)
+
         if len(cb_info) > 6:
             for cb_item_info in cb_info.strip().split("_"):
                 item, score = cb_item_info.strip().split(":")
@@ -147,13 +164,8 @@ class index:
 
         ret = "\n".join(ret_list)
 
-        return ret
-
-
-class test:
-    def GET(self):
-        print web.input()
-        return '222'
+        return json.dumps({'block_one': ret, \
+                           'block_two': '456'}, ensure_ascii=True, encoding='UTF-8')
 
 
 if __name__ == "__main__":
