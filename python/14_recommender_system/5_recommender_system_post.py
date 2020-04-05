@@ -59,7 +59,7 @@ class index:
 
         # sterp 1:解析请求
         params = web.input()
-        content = params["reqRes"]
+        content = params["item_id"]
 
         req_userid, req_itemid = content.strip().split("_")
 
@@ -162,7 +162,7 @@ class index:
             item_rank_score = str(tup[1])
             ret_list.append(" -> ".join([req_item_name_return, item_name, item_rank_score]))
 
-        ret = "\n".join(ret_list)
+        ret = "<br>".join(ret_list)
 
         return json.dumps({'block_one': ret, \
                            'block_two': '456'}, ensure_ascii=True, encoding='UTF-8')
