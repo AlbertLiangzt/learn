@@ -1,4 +1,5 @@
-data.rar需要先解压
+data.rar需要先解压，里面大部分数据均为截取测试数据，
+user_profile.data	music_meta.data	user_watch_pref.sml	为完整数据
 
 推荐系统数据处理流程
 1、数据预处理——过滤数据、合并数据
