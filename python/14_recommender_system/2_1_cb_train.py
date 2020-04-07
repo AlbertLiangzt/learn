@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/usr/local/python/bin
 # --coding:utf-8--
 
 import jieba.analyse
