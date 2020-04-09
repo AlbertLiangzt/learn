@@ -1,4 +1,4 @@
-#!/usr/local/python/bin
+#!/usr/local/bin/python
 # --coding:utf-8--
 
 music_meta_data = './data/music_meta.data'

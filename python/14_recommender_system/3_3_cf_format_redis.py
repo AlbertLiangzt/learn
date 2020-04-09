@@ -1,4 +1,4 @@
-#!/usr/local/python/bin
+#!/usr/local/bin/python
 # --coding:utf-8--
 
 input_file = "./data/3_2_cf_result.data"
