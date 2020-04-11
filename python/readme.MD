@@ -10,3 +10,4 @@ name | info |
 01_normal_mr | 普通的map、reduce任务 |
 02_x_reduce | 多reduce |
 03_join_mr | 根据id进行join |
+04_tfidf | term frequency–inverse document frequency |
