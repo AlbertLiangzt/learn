@@ -11,3 +11,4 @@ name | info |
 02_x_reduce | 多reduce |
 03_join_mr | 根据id进行join |
 04_tfidf | term frequency–inverse document frequency |
+05_lcs | Longest Common Subsequence最长公共子序列 |
