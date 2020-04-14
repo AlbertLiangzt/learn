@@ -13,3 +13,5 @@ name | info |
 04_tfidf | term frequency–inverse document frequency |
 05_lcs | Longest Common Subsequence最长公共子序列 |
 06_jieba_test | jieba分词 |
+07_pyweb | pyweb |
+08_inverted_index | 倒排索引 |
