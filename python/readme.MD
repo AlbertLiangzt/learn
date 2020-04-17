@@ -17,3 +17,4 @@ name | info |
 08_inverted_index | 倒排索引 |
 09_recommendation_algorithm | 推荐算法——基于协同过滤Collaboration Filtering |
 10_classification_algorithm_NB | 分类算法——朴素贝叶斯 (NaiveBeyesian Classification NB) |
+11_roc_auc_nb | ROC AUC |
