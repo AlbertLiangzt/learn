@@ -19,3 +19,4 @@ formula.doc里面包含了涉及到的大部分公式、推导
 | 11_roc_auc_nb | ROC AUC |
 | 12_classification_algorithm_LR | 分类算法—逻辑回归Logistic Regression |
 | 13_multi-classification_softmax | 多分类—softmax |
+| 14_recommender_system | 推荐系统-整合mr、cf/cb、Sklearn、LR |
