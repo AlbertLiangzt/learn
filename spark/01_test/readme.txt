@@ -11,4 +11,4 @@ UserWatchList.scala
 	bash run_yarn.sh
 
 com.albert.scala.test-1.0-SNAPSHOT.jar
-	maven打包后的执行jar包
+	maven打包后的jar包
