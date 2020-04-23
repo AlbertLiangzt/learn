@@ -9,6 +9,7 @@
 | hadoop | 2.6.5 |
 | spark | 1.6.0 |
 | scala | 2.10.5 |
+| hive | 1.2.2 |
 
 ## python文件夹
 
