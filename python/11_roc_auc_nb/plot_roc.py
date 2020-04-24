@@ -5,14 +5,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, auc, precision_recall_curve
 
-inputfile = sys.argv[1]
-
+# inputfile = sys.argv[1]
+inputfile = "./auc.raw"
 label_list = []
 score_list = []
 with open(inputfile, 'r') as fd:
     for line in fd:
-		if len(fs) != 2:
-            continue
         fs = line.strip().split('	')
         label = int(fs[0])
         score = float(fs[1])
