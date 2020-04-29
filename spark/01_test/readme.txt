@@ -10,5 +10,7 @@ UserWatchList.scala
 	bash run_spark.sh
 	bash run_yarn.sh
 
+pom.xml
+	maven的pom.xml文件
 com.albert.scala.test-1.0-SNAPSHOT.jar
 	maven打包后的jar包
