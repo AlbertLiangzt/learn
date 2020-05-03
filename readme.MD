@@ -10,6 +10,8 @@
 | spark | 1.6.0 |
 | scala | 2.10.5 |
 | hive | 1.2.2 |
+| zookeeper | 3.4.5 |
+| hbase | 0.98.6 |
 
 ## python文件夹
 
