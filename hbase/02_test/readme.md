@@ -27,10 +27,13 @@ http://master:60010/table.jsp?name=m_table
 先将状态设为不可用，再删除，删除后hdfs没有数据
 
 ## 写数据：
-	> put "m_table", '1001', 'meta_data:name', 'zhang3'
-	> put "m_table", '1001', 'meta_data:age', '18'
-	> put "m_table", '1002', 'meta_data:name', 'li4'
-	> put "m_table", '1002', 'meta_data:gender', 'man'
+	> put 'm_table', '1001', 'meta_data:name', 'zhang3'
+	> put 'm_table', '1001', 'meta_data:age', '18'
+	> put 'm_table', '1002', 'meta_data:name', 'li4'
+	> put 'm_table', '1002', 'meta_data:gender', 'man'
+
+若想此时在hdfs上进行查看，需
+	> flush 'm_table'
 
 ## 读数据：
 ### 全表扫描
