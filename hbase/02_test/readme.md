@@ -30,13 +30,33 @@ http://master:60010/table.jsp?name=m_table
 	> put 'm_table', '1001', 'meta_data:name', 'zhang3'
 	> put 'm_table', '1001', 'meta_data:age', '18'
 	> put 'm_table', '1002', 'meta_data:name', 'li4'
-	> put 'm_table', '1002', 'meta_data:gender', 'man'
+	> put 'm_table', '1002', 'meta_data:gender', 'male'
 
 若想此时在hdfs上进行查看，需
+
 	> flush 'm_table'
 
 ## 读数据：
-### 全表扫描
+### 全表扫描(性能差)
 	> scan "m_table"
 ### 读一条记录：
 	> get "m_table", '1001'
+
+
+
+## 修改数据
+### 1.修改版本号
+设定版本号，版本号为几 就是存储几个版本的数据
+
+	> alter 'm_table', {NAME=>'meta_data', VERSIONS=>3}
+### 2.修改
+	> put 'm_table', '1001', 'meta_data:age', '19'
+### 3.根据时间戳查看
+	> get 'm_table', '1001', {COLUMN=>'meta_data:age', TIMESTAMP=>1588690735078}
+	> get 'm_table', '1001', {COLUMN=>'meta_data:age', TIMESTAMP=>1588693015515}
+### 4.获取多个版本数据
+	> get 'm_table', '1001', {COLUMN=>'meta_data:age', VERSIONS=>2}
+
+## 过滤
+
+	> scan 'm_table',  FILTER=>"ValueFilter(=, 'binary:zhang3')"
