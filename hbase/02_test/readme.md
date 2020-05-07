@@ -20,7 +20,7 @@
 
 - 5.清空数据
 
-		> truncate "m_table"
+		> truncate 'm_table'
 
 	![在这里插入图片描述](https://img-blog.csdnimg.cn/20200506144902807.png)
 
@@ -72,6 +72,14 @@
 - 2.修改
 	
 		> put 'm_table', '1001', 'meta_data:age', '19'
+
+- 3.分裂region
+
+		> split 'm_table', '49a0707dfd832791eeca0317bb720247'
+
+- 4.合并region
+
+		> merge_region 'd1b66fa0f9a07dc9432a787a41eaf45d', 'd4510bab166ced602b05232a62f4feb2', true
 
 # 四、查询表数据：
 - 1.全表扫描(性能差)
