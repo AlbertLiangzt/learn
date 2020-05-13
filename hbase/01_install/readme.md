@@ -80,3 +80,11 @@ hbase/bin目录下
 		hbase> status
 
 	![shell](https://img-blog.csdnimg.cn/2020043022361085.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FsYmVydExpYW5nenQ=,size_16,color_FFFFFF,t_70)
+
+- 进程查看
+
+	- master会有HMaster进程
+
+	- slave会有HRegionServer进程
+	
+	![在这里插入图片描述](https://img-blog.csdnimg.cn/20200513214457754.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FsYmVydExpYW5nenQ=,size_16,color_FFFFFF,t_70)
