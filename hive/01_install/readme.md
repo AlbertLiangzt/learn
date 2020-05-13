@@ -76,6 +76,14 @@ hive/conf目录下
 
 	hive
 ![start hive](https://img-blog.csdnimg.cn/20200424220354431.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FsYmVydExpYW5nenQ=,size_16,color_FFFFFF,t_70)
+
+启动成功标志
+
+- master会有HMaster进程
+
+- slave会有HRegionServer进程
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200513214457754.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FsYmVydExpYW5nenQ=,size_16,color_FFFFFF,t_70)
+
 ### <font color=red>注意：可修改mysql权限，方便slave读取master数据</font>
 	
 	mysql -uroot -p111111
