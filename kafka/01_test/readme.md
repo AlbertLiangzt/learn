@@ -1,3 +1,11 @@
+# 文件说明
+- consumer_group.py	consumer接收端
+- consumer_load_partition.py	consumer读取指定partition
+- producer_group.py	producer生产端
+- producer_partition_key.py	发送到指定partition——根据key
+- producer_partition_none.py	发送到指定partition——随机(第一次)
+- producer_partition_partition.py	发送到指定partition——根据partition
+
 # 0.解压缩
 
 	tar -zxvf kafka_2.11-0.10.2.1.tgz
@@ -115,6 +123,13 @@ replication-factor参数不能超过机器个数，否则会报错
 
 # 3.producer、consumer
 
+<font color=red>
+需保证集群启动，详见2.2.1
+</font>
+
+	./bin/kafka-server-start.sh config/server.properties
+
+
 ## 3.1 consumer group
 
 - consumer_group.py代码
@@ -197,7 +212,7 @@ replication-factor参数不能超过机器个数，否则会报错
 	python producer_partition.py
 
 
-### 3.2.2 partition分区的原则
+## (3.2扩展) 发送到partition的三种情况
 
 - 指定partition的值
 
@@ -263,3 +278,41 @@ replication-factor参数不能超过机器个数，否则会报错
 
 <font color=red>传输的值都是有序的，注意看时间戳！！！</br>
 在各自的partition中有序</br></font>
+
+## 3.3 从指定partition读取数据
+
+- consumer_load_partition.py代码
+
+		#!/usr/local/bin/python
+		# --coding:utf-8--
+		
+		from kafka import KafkaConsumer
+		from kafka import TopicPartition
+		from kafka.structs import OffsetAndMetadata
+		from kafka.structs import TopicPartition
+		
+		def main():
+		    consumer = KafkaConsumer('topic_test_cluster', bootstrap_servers=['master:9092'])
+		
+		    print consumer.partitions_for_topic('topic_test_cluster')
+		    print consumer.topics()
+		    print consumer.subscription()
+		    print consumer.assignment()
+		    print consumer.beginning_offsets(consumer.assignment())
+		
+			# 读取partition为2、偏移量从5开始的数据
+		    consumer.seek(TopicPartition(topic = u'topic_test_cluster', partition = 2), 5)
+		
+		    for msg in consumer:
+		        print ('%s:%d:%d: key=%s value=%s' % (msg.topic, msg.partition, msg.offset, msg.key, msg.value))
+		
+		if __name__ == '__main__':
+	    	main()
+
+- 启动一个窗口
+
+		python consumer_load_partition.py
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200517005426255.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FsYmVydExpYW5nenQ=,size_16,color_FFFFFF,t_70)
+
+
