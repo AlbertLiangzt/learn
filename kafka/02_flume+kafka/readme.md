@@ -1,3 +1,9 @@
+## 文件说明
+接01_test
+
+- consumer_flume_kafka.py	consumer
+- flume_kafka_exec.properties	exec配置	
+- flume_kafka_interceptor.properties	interceptor配置
 # 4.flum+kafka
 
 ## 4.1服务准备kafka
