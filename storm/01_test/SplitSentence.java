@@ -2,6 +2,7 @@ import backtype.storm.task.OutputCollector;
 import backtype.storm.task.TopologyContext;
 import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.base.BaseRichBolt;
+import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
@@ -33,21 +34,21 @@ public class SplitSentence extends BaseRichBolt {
             }
             outputCollector.ack(input);
         }
-
-    @Override
-    public void cleanup() {
     }
+        @Override
+        public void cleanup () {
+        }
 
-    @Override
-    public void declareOutputFields(OutputFieldsDeclarer declarer) {
-        declarer.declareStream("split_stream", new Fields("word"));
+        @Override
+        public void declareOutputFields (OutputFieldsDeclarer declarer){
+            declarer.declareStream("split_stream", new Fields("word"));
+
+        }
+
+        @Override
+        public Map<String, Object> getComponentConfiguration () {
+            // TODO Auto-generated method stub
+            return null;
+        }
 
     }
-
-    @Override
-    public Map<String, Object> getComponentConfiguration() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-}
