@@ -34,10 +34,20 @@ public class SplitSentence extends BaseRichBolt {
             outputCollector.ack(input);
         }
 
+    @Override
+    public void cleanup() {
     }
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
+        declarer.declareStream("split_stream", new Fields("word"));
 
     }
+
+    @Override
+    public Map<String, Object> getComponentConfiguration() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }
