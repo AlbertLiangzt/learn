@@ -20,9 +20,11 @@ public class WordCount {
         conf.setDebug(false);
 
         if (args[0].equals("local")) {
+            System.out.println("----start----WordCount----local----");
             LocalCluster localCluster = new LocalCluster();
             localCluster.submitTopology("WordCount_local_demo", conf, builder.createTopology());
         } else {
+            System.out.println("----start----WordCount----cluster----");
             try {
                 StormSubmitter.submitTopology("WordCount_cluster_demo", conf, builder.createTopology());
             } catch (AlreadyAliveException e) {

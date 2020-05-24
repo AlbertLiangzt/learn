@@ -24,7 +24,7 @@ public class SplitSentence extends BaseRichBolt {
     @Override
     public void execute(Tuple input) {
         String sentence = input.getString(0);
-        System.out.println("sentence: " + sentence);
+        System.out.println("----input----sentence: " + sentence);
 
         if ("how do you do".equals(sentence)) {
             outputCollector.fail(input);
