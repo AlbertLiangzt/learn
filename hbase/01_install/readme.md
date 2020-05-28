@@ -35,7 +35,7 @@ hbase/conf目录下
 				<name>hbase.zookeeper.quorum</name>
 				<value>master,slave1,slave2</value>
 			</property>
-			<!-- 两个节点时间差 -->
+			<!-- 与master节点时间差 ms -->
 			<property>
 				<name>hbase.master.maxclockskew</name>
 				<value>150000</value>
