@@ -3,7 +3,7 @@ systemctl stop firewalld
 ssh slave1 systemctl stop firewalld
 ssh slave2 systemctl stop firewalld
 
-echo "--------synchronization time--------"
+echo "--------time synchronization--------"
 ntpdate ntp1.aliyun.com
 ssh slave1 ntpdate ntp1.aliyun.com
 ssh slave2 ntpdate ntp1.aliyun.com
