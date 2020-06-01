@@ -1,4 +1,9 @@
+# 文件说明
+- WordCount.scala 简单的wordCount
+- WordCountWithState.scala 会记录历史的wordCount
+- 
 
+## 操作说明
 - 1.运行任务
 
 1>标准输出 2>错误输出
