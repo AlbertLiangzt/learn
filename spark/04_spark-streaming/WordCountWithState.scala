@@ -31,5 +31,4 @@ object WordCountWithState {
     streamCtx.awaitTermination()
   }
 
-
 }
