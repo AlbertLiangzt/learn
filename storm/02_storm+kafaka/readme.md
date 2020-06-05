@@ -1,7 +1,7 @@
 ## 文件说明
 
-- WordCount.java	wordCount主程序
-- WordCountSpout.java	spout
+- PrinterBolt.java	wordCount主程序
+- StormKafka.java	spout
 - SplitSentence.java	模拟第一个bolt部分数据失败
 - WordCountBolt.java	bolt
 - pom.xml	配置文件
@@ -118,6 +118,7 @@
 
 
 ## 2.启动服务
+### 2.1 启动storm
 apache-storm-0.9.3/conf/bin/目录下
 
 - master
@@ -131,20 +132,35 @@ apache-storm-0.9.3/conf/bin/目录下
 		python storm supervisor &
 		python storm logviewer &
 
-## 3.停止服务
+### 2.2 启动kafka
+kafka_2.11-0.10.2.1/目录下
 
+- master、slave1、slave2
+
+		./bin/kafka-server-start.sh ./config/server.properties &
+
+## 3.启动任务
+
+### 3.1启动kafka producer
+kafka_2.11-0.10.2.1/目录下
+
+	./bin/kafka-console-producer.sh --broker-list localhost:9092 --topic storm_kafka
+
+### 3.2启动storm任务
+
+	python /usr/local/src/apache-storm-0.9.3/bin/storm jar \
+	    /usr/local/src/learn/albert/24_storm_extend/extend.jar \
+	    stormKafka.StormKafka \
+
+
+![start](https://img-blog.csdnimg.cn/20200605113412442.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FsYmVydExpYW5nenQ=,size_16,color_FFFFFF,t_70)
+
+
+
+## 3.flume
+
+	./bin/flume-ng agent --conf conf --conf-file ./conf/flume_kafka_storm.properties --name agent1 -Dflume.root.logger=INFO,console
+
+
+## 终止进程
 	kill -9 `ps aux | fgrep storm | fgrep -v 'fgrep' | awk '{print $2}'` 
-
-## 4.启动任务
-
-### 4.1启动本地任务
-	python /usr/local/src/apache-storm-0.9.3/bin/storm jar \
-		/usr/local/src/learn/albert/23_storm/01_test.jar \
-		WordCount \
-		local
-### 4.2启动集群任务
-	python /usr/local/src/apache-storm-0.9.3/bin/storm jar \
-		/usr/local/src/learn/albert/23_storm/01_test.jar \
-		WordCount \
-		remote
-
