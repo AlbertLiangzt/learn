@@ -1,13 +1,18 @@
 ## 文件说明
 
-- PrinterBolt.java	wordCount主程序
-- StormKafka.java	spout
-- SplitSentence.java	模拟第一个bolt部分数据失败
-- WordCountBolt.java	bolt
-- pom.xml	配置文件
-- run.sh	启动脚本
+- flume_kafka_storm.properties	flume配置
+- storm_master_lib.zip	storm在master节点的lib包
+- storm_slave_lib.zip	storm在slave节点的lib包
+- StormKafka.java	StormKafka的测试类
+- PrinterBolt.java	只做输出
+- run_storm_kafka.sh	启动脚本
+
+# <font color=red>一、kafka+storm</font>
 
 ## 0.放入依赖的jar包
+
+可以直接下载使用，注意StormKafka.java、flume_kafka_storm.properties中的topic名称
+
 ### 0.1 storm-kafka相关
 
 需要将storm-kafka-0.9.3.jar放到storm里
@@ -147,6 +152,7 @@ kafka_2.11-0.10.2.1/目录下
 	./bin/kafka-console-producer.sh --broker-list localhost:9092 --topic storm_kafka
 
 ### 3.2启动storm任务
+与kafka+storm的storm任务一样
 
 	python /usr/local/src/apache-storm-0.9.3/bin/storm jar \
 	    /usr/local/src/learn/albert/24_storm_extend/extend.jar \
@@ -156,11 +162,60 @@ kafka_2.11-0.10.2.1/目录下
 ![start](https://img-blog.csdnimg.cn/20200605113412442.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FsYmVydExpYW5nenQ=,size_16,color_FFFFFF,t_70)
 
 
+# <font color=red>二、flume+kafka+storm</font>
 
-## 3.flume
+在kafka+storm、flume+kafka的基础上，就能实现flume+kafka+storm
+
+## 1.启动服务
+## 1.1启动flume
 
 	./bin/flume-ng agent --conf conf --conf-file ./conf/flume_kafka_storm.properties --name agent1 -Dflume.root.logger=INFO,console
 
+### 1.2启动kafka
+kafka_2.11-0.10.2.1/目录下
 
-## 终止进程
+- master、slave1、slave2
+
+		./bin/kafka-server-start.sh ./config/server.properties &
+
+### 1.3启动storm
+
+apache-storm-0.9.3/conf/bin/目录下
+
+- master
+
+		python storm nimbus &
+		python storm ui &
+		python storm logviewer &
+
+- slave1、slave2
+	
+		python storm supervisor &
+		python storm logviewer &
+
+## 2.启动任务
+
+### 2.1启动storm任务
+
+	python /usr/local/src/apache-storm-0.9.3/bin/storm jar \
+	    /usr/local/src/learn/albert/24_storm_extend/extend.jar \
+	    stormKafka.StormKafka \
+
+### 2.2flume端进行输出
+
+由flume_kafka_storm.properties配置
+
+apache-flume-1.6.0-bin/目录下
+
+  	./bin/flume-ng agent --conf conf --conf-file ./conf/flume_kafka_storm.properties --name agent1 -Dflume.root.logger=INFO,console
+
+![flume kafka storm](https://img-blog.csdnimg.cn/20200606223955614.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FsYmVydExpYW5nenQ=,size_16,color_FFFFFF,t_70)
+
+
+# 附：停止storm进程
+master、slave1、slave2下执行
+
 	kill -9 `ps aux | fgrep storm | fgrep -v 'fgrep' | awk '{print $2}'` 
+
+
+# 附：<a href="https://blog.csdn.net/AlbertLiangzt/article/details/106178294">flume+kafka测试</a>
