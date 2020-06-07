@@ -12,9 +12,9 @@ import java.io.IOException;
 public class HttpClientTest {
     public static void main(String[] args) throws Exception {
         CloseableHttpClient httpClient = HttpClients.createDefault();
-        String content = "this is a httpclient test";
+        String content = "http_client_test";
         System.out.println("----content----" + content);
-        HttpGet httpGet = new HttpGet("http://192.168.224.10:8808/?content" + content);
+        HttpGet httpGet = new HttpGet("http://192.168.224.10:8808/?content=" + content);
 
         try {
             CloseableHttpResponse response = httpClient.execute(httpGet);
