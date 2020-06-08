@@ -18,7 +18,7 @@ public class FeatureExtractBolt extends BaseBasicBolt {
     @Override
     public void execute(Tuple tuple, BasicOutputCollector basicOutputCollector) {
         System.out.println("----tuple----" + tuple);
-        String content = tuple.toString();
+        String content = tuple.getString(0);
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
