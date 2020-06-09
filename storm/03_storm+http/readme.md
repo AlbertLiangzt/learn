@@ -1,5 +1,10 @@
 ## 文件说明
+- HttpClientTest.java http测试类
+- StormKafka.java	storm的spout
+- FeatureExtractBolt.java	storm的bolt
 
+- run_storm_http_test.sh http测试类
+- run_storm_http.sh	http分词
 
 # 一、http+storm
 
@@ -65,6 +70,13 @@ apache-storm-0.9.3/conf/bin/目录下
 
 <a href="https://github.com/AlbertLiangzt/learn/tree/master/python/07_pyweb">pyweb的代码——25_http_storm.py</a>
 
+	python 25_http_storm.py 8808
+
+## 2.启动任务
+
+	python /usr/local/src/apache-storm-0.9.3/bin/storm jar \
+		/usr/local/src/learn/albert/24_storm_extend/extend.jar \
+		stormHttp.StormKafka 
 
 kafka同<a href="https://blog.csdn.net/AlbertLiangzt/article/details/106596343">flume+kafka+storm</a>
 ，未做展示
@@ -78,4 +90,3 @@ kafka_2.11-0.10.2.1/目录下
 	./bin/kafka-topics.sh --delete --zookeeper localhost:2181 --topic storm_kafka
 
 	./bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partition 5 --topic storm_kafka
-
