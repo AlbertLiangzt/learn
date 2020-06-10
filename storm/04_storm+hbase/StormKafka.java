@@ -10,7 +10,7 @@ import stormKafka.PrinterBolt;
 
 public class StormKafka {
     public static void main(String[] args) throws Exception {
-        String topic = "strom_kafka";
+        String topic = "storm_kafka";
         String zkRoot = "/storm_kafka";
         String spoutId = "kafkaSpout";
 
