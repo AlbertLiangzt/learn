@@ -1,9 +1,3 @@
-<head>
-  <script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?...">
-</script>
-</head>
-
 # 回归算法 LR算法
 
 二分类(Logistic Regression 逻辑斯谛回归 简称LR)：model -> 0/1
