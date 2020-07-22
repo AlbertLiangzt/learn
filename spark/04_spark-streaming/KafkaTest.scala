@@ -18,7 +18,7 @@ object KafkaTest {
     val streamCtx = new StreamingContext(sparkConf, Seconds(5))
     streamCtx.checkpoint("hdfs://master:9000/hdfs_checkpoint")
 
-    val zk = "master:2181, slave1:2181, slave2:2181"
+    val zk = "master:2181,slave1:2181,slave2:2181"
     val groupId = "group_1"
 
     val topicAndLine: ReceiverInputDStream[(String, String)] =
