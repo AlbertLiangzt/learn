@@ -6,7 +6,7 @@ import org.apache.spark.streaming.dstream.{DStream, ReceiverInputDStream}
 import org.apache.spark.streaming.kafka.KafkaUtils
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 
-object KafkaTest {
+object KafkaReceiver {
   def updateFunction(currentValues: Seq[Int], preValues: Option[Int]): Option[Int] = {
     val current = currentValues.sum
     val pre = preValues.getOrElse(0)
@@ -14,7 +14,7 @@ object KafkaTest {
   }
 
   def main(args: Array[String]): Unit = {
-    val sparkConf = new SparkConf().setAppName("StreamingWordCountKafka")
+    val sparkConf = new SparkConf().setAppName("StreamingWordCountKafkaReceiver")
     val streamCtx = new StreamingContext(sparkConf, Seconds(5))
     streamCtx.checkpoint("hdfs://master:9000/hdfs_checkpoint")
 
