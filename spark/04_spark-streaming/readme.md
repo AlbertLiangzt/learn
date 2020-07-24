@@ -4,6 +4,24 @@
 - WordCountWithState.scala 会记录历史的wordCount
 - WindowTest.scala 只记录当前某时间段的wordCount
 
+----
+
+- KafkaReceiver.scala kafka的receive模式
+- KafkaDirect.scala kafka的direct模式
+
+----
+
+- wc_local.sh wordCount本地模式
+- wc_standalone.sh wordCount单机模式
+- wc_cluster.sh wordCount集群模式
+
+---
+
+- wc_state.sh wordCount状态管理
+- wc_window.sh wordCount窗口函数
+- wc_kafka.sh wordCount与kafka连接
+
+
 ## 操作说明
 
 # 1.运行任务
@@ -70,9 +88,12 @@
 会保存历史的信息
 
 # 6.测试windowTest
+
 只保留某个时间点往前的信息，比如只保存5秒钟，9:00:00的时候，此时的数据是8:59:55-9:00:00这个时间段内的数据，9:00:30的时候，此时的数据是9:00:25-9:00:30这个时间段内的数据，
 
 
 只测本地，其他测试同4
 
 ![windowTest](https://img-blog.csdnimg.cn/20200602181634185.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FsYmVydExpYW5nenQ=,size_16,color_FFFFFF,t_70)
+
+# 7.测试kafka
