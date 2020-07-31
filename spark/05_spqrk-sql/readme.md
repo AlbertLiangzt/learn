@@ -9,6 +9,7 @@
 - sql-1.0.SNAPSHOT.jar 以上的scala编译成的jar包
 
 - sql_**.sh 对应的sparksql在linux下的执行命令
+- sparksql_terminal.sh 进入spark_sql的终端
 
 - pom.xml pom文件
 
