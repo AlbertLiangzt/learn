@@ -116,7 +116,11 @@
 	hive> SELECT * FROM rating_table_bucket tablesample(bucket 1 out of 8 on userid) limit 5;
 
 ## <font color=red>注意：</font>
+使用默认的Derby数据库作为元数据存储，会在当前工作目录下出现一个metastore_db的目录，该目录是在启动hive时由Derby创建。
+
+切换到新的工作目录，Derby会“忘记”前一个目录下的元数据存储信息
 
 - 第二次进入hive想看原来的数据，需要在上次建表的地方执行hive命令
 	- 第一次在/user/local/tmp/下执行的hive命令，并建表插数据
 	- 第二次只能在/user/local/tmp/下执行的hive命令，show tables;才会显示数据
+	
