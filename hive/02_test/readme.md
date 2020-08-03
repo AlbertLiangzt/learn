@@ -115,6 +115,40 @@
 
 	hive> SELECT * FROM rating_table_bucket tablesample(bucket 1 out of 8 on userid) limit 5;
 
+## 六、查询数据
+
+### 1.正常查询
+进入hive客户端，执行查询操作
+	
+	$ hive
+	hive> select * from movie_table limit 3;
+
+	# 以下是执行结果
+	OK
+	movieId	title	genres
+	1	Toy Story (1995)	Adventure|Animation|Children|Comedy|Fantasy
+	2	Jumanji (1995)	Adventure|Children|Fantasy
+	Time taken: 1.068 seconds, Fetched: 3 row(s)
+	# 以上是执行结果
+
+	hive> 
+
+### 2.一次使用查询
+只执行一次或多次查询，查询完成立即退出
+
+	$ hive -e "select * from movie_table limit 3"	
+
+	#以下是执行结果
+	OK
+	movieId	title	genres
+	1	Toy Story (1995)	Adventure|Animation|Children|Comedy|Fantasy
+	2	Jumanji (1995)	Adventure|Children|Fantasy
+	Time taken: 1.406 seconds, Fetched: 3 row(s)
+	#以上是执行结果
+
+	$ 
+
+
 ## <font color=red>注意：</font>
 使用默认的Derby数据库作为元数据存储，会在当前工作目录下出现一个metastore_db的目录，该目录是在启动hive时由Derby创建。
 
