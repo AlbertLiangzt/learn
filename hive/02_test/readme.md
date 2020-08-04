@@ -134,20 +134,32 @@
 	hive> 
 
 ### 2.一次使用查询
-只执行一次或多次查询，查询完成立即退出
+
+只执行一次或多次查询（多个查询用“;”分割），查询完成立即退出
 
 	$ hive -e "select * from movie_table limit 3"	
 
-	#以下是执行结果
+	# 以下是执行结果
 	OK
 	movieId	title	genres
 	1	Toy Story (1995)	Adventure|Animation|Children|Comedy|Fantasy
 	2	Jumanji (1995)	Adventure|Children|Fantasy
 	Time taken: 1.406 seconds, Fetched: 3 row(s)
-	#以上是执行结果
+	# 以上是执行结果
 
 	$ 
 
+静默模式，删除“OK”“Time taken”等
+
+	$ hive -S -e "select * from movie_table limit 3";
+
+	# 以下是执行结果
+	movieId	title	genres
+	1	Toy Story (1995)	Adventure|Animation|Children|Comedy|Fantasy
+	2	Jumanji (1995)	Adventure|Children|Fantasy
+	# 以上是执行结果
+
+	$ 
 
 ## <font color=red>注意：</font>
 使用默认的Derby数据库作为元数据存储，会在当前工作目录下出现一个metastore_db的目录，该目录是在启动hive时由Derby创建。
