@@ -56,7 +56,9 @@
 | 定义 | 无<font color=red>external</font>修饰 | 被<font color=red>external</font>修饰 |
 | 管理 | hive | hdfs |
 | 存储位置 | 若指定路径：则为<font color=red>location</font>位置;</br>不指定路径：默认为/user/hive/warehouse</br> 配置路径hive-site.xml中<br>hive.metastore.warehouse.dir | 同内部表 |
-| 删除表 | HDFS中文件被删除 | HDFS中文件不删除 |
+| 删除表 | HDFS中文件被删除 | HDFS中文件不删除,</br>但会删除描述表的元数据 |
+
+严格意义上来说，hive只是管理外部表的这些目录和文件，并没有完全控制的权限
 
 ## 二、导入数据 
 
