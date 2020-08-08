@@ -16,6 +16,12 @@
 
 - 1.hive中执行sql
 	
+	<font color=red>external</font>指表是外部的
+
+	<font color=red>location</font>指定hive数据的路径
+
+	<font color=red>row format delimited</font>分割行的字符
+
 		# 内部表
 		hive> CREATE TABLE rating_table(
 			> userid string,
@@ -27,7 +33,7 @@
 			> stored as textfile
 			> location '/hive_table';
 
-		# 外部表
+		# 外部表 
 		hive> CREATE EXTERNAL TABLE movie_table(
 			> movieid string,
 			> title string,
@@ -168,5 +174,4 @@
 
 - 第二次进入hive想看原来的数据，需要在上次建表的地方执行hive命令
 	- 第一次在/user/local/tmp/下执行的hive命令，并建表插数据
-	- 第二次只能在/user/local/tmp/下执行的hive命令，show tables;才会显示数据
-	
+	- 第二次只能在/user/local/tmp/下执行的hive命令，`show tables`才会显示数据
