@@ -6,4 +6,4 @@ ts string
 )
 row format delimited fields terminated by ','
 stored as textfile
-location '/rating_table'
+location '/rating_table';
