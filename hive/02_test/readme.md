@@ -80,6 +80,14 @@
 	INSERT OVERWRITE directory '/hive_out_data' select userid, title from table_b;
 
 ## 四、分区partition
+- 分区表能水平分散压力，将数据从物理上转移到和使用最频繁的而用户更近的地方，以实现其他目的。
+- 分区表具有重要的性能优势，而且分区表也可以将数据以一种符合逻辑的方式进行组织，比如分层存储
+- 比如以下的这张表，hive会创建好可以梵音分区结构的子目录。比如：
+
+	../rating_table_partition/dt=2018</br>
+	../rating_table_partition/dt=2019</br>
+	../rating_table_partition/dt=2020
+
 ### 1.创建分区表
 
 	hive> CREATE TABLE rating_table_partition(
@@ -89,7 +97,7 @@
 		> )
 		> partitioned by(dt STRING)
 		> row format delimited fields terminated by '\t'
-		> lines terminated by '\n'
+		> lines terminated by '\n';
 		
 ### 2.导入数据
 
@@ -97,9 +105,32 @@
 	hive> LOAD DATA LOCAL INPATH '/usr/local/src/learn/albert/17_hive_test/ratings_2003-10.data' OVERWRITE INTO TABLE rating_table_partition partition(dt='2003-10');
 	hive> LOAD DATA LOCAL INPATH '/usr/local/src/learn/albert/17_hive_test/ratings_2008-08.data' OVERWRITE INTO TABLE rating_table_partition partition(dt='2008-08');
 
-### 3.查看分区数
+### 3.查看分区
+- 查看分区数
+
+		hive> show partitions rating_table_partition;
+
+		OK
+		dt=2003-09
+		dt=2003-10
+		dt=2008-08
+		Time taken: 0.059 seconds, Fetched: 3 row(s)
+
+- 查看分区键
 	
-	hive> show partitions rating_table_partition;
+		hive> describe rating_table_partiion;
+
+		OK
+		userid              	string              	                    
+		movieid             	string              	                    
+		rating              	string              	                    
+		dt                  	string              	                    
+			 	 
+		# Partition Information	 	 
+		# col_name            	data_type           	comment             
+			 	 
+		dt                  	string              	                    
+		Time taken: 0.061 seconds, Fetched: 9 row(s)
 
 ## 五、桶bucket
 
