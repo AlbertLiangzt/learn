@@ -82,11 +82,13 @@
 ## 四、分区partition
 - 分区表能水平分散压力，将数据从物理上转移到和使用最频繁的而用户更近的地方，以实现其他目的。
 - 分区表具有重要的性能优势，而且分区表也可以将数据以一种符合逻辑的方式进行组织，比如分层存储
-- 比如以下的这张表，hive会创建好可以梵音分区结构的子目录。比如：
+- 比如以下的这张表，hive会创建好可以反应分区结构的子目录。比如：
 
 	../rating_table_partition/dt=2018</br>
 	../rating_table_partition/dt=2019</br>
 	../rating_table_partition/dt=2020
+
+- 外部表也能分区，用法与非外部表相同
 
 ### 1.创建分区表
 
@@ -200,6 +202,69 @@
 
 	$ 
 
+## 七、修改表
+
+ALTER TABLE仅会修改表元数据，不会修改表数据
+
+### 1、表名
+
+	hive> ALTER TABLE table_old_name RENAME TO table_new_name;
+
+### 2、表分区
+
+- 增加表分区
+
+		```sql
+		ALTER TABLE log_table ADD IF NOT EXISTS
+		PARTITION (year=2020, month=1, day=1) LOCATION '/logs/2020/01/01'
+		PARTITION (year=2020, month=1, day=2) LOCATION '/logs/2020/01/02'
+		PARTITION (year=2020, month=1, day=3) LOCATION '/logs/2020/01/03'
+		...
+		;
+		```
+
+- 修改/移动分区
+
+		ALTER TABLE log_table PARTITION (year=2020, month=1, day=3) SET LOCATION '/logs/2019/11/13';
+
+- 删除分区
+
+		ALTER TABLE log_table DROP IF EXISTS PARTITION (year=2020, month=1, day=3);
+
+	同理，外部表分区内数据不会被删除，内部表分区内数据会删除
+
+### 3、列
+
+- 修改列
+
+		ALTER TABLE log_table CHANGE COLUMN col_old_name col_new_name STRING FIRST;
+
+	<font color=blue>ALTER TABLE </font>log_table *# 修改的表*</br> 
+	<font color=blue>CHANGE COLUMN</font> col_old_name col_new_name STRING *# 原列名，新列名 列类型*</br>
+	<font color=blue>FIRST</font> *# 该列的位置*;
+
+	列的位置可以使用<font color=blue>AFTER</font> col_name，移动到某列之后 
+
+- 增加列
+
+		ALTER TABLE log_table ADD COLUMNS (col_name_one STRING, col_name_two INT);
+
+- 删除/替换列
+
+	没有类似于mysql的<font color=blue>ALTER TABLE </font>table_name <font color=blue>DROP </font>col_name的功能。只能做替换
+
+		原表 
+		
+			CREATE TABLE table_name(
+				name STRING,
+				id INT
+			);
+
+		删除id列
+
+			ALTER TABLE table_name REPLACE COLUMNS (
+				name STRING
+			);
 ## <font color=red>注意：</font>
 使用默认的Derby数据库作为元数据存储，会在当前工作目录下出现一个metastore_db的目录，该目录是在启动hive时由Derby创建。
 
