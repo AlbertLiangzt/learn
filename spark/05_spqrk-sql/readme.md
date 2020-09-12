@@ -10,6 +10,8 @@
 
 - sql_**.sh 对应的sparksql在linux下的执行命令
 
+- pom.xml pom文件
+
 ## 注意
 1、运行sql_hive的时候需要添加mysql的connector
 
