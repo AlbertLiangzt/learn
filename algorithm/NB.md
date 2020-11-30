@@ -71,15 +71,19 @@ P(xj|yi)就是每个类别中各个特征出现的概率
 
 ### 1.1 将未出现的词语保存在词典wordDic中
 
-记录词语对应的id——{词语id:1}
+记录词语对应的id
 
 wordDic={1:1, 2:1, 3:1 ...}
 
+<font color='blue'>wordDic{词语id:1}</font>
+
 ### 1.2 统计词语出现的次数，保存在词典classDic中
 
-统计词语出现的次数——{文章类型:{词语id，出现次数}}
+统计词语出现的次数
 
 classDic={'P':{1:10, 2:5 ...}， 'F':{5:6, 11:7...}}
+
+<font color='blue'>classDic[文章类型][{词语id:出现次数}]</font>
 
 ## 2 求先验概率
 
@@ -89,29 +93,33 @@ P(yi)=每类文章个数/文章总数
 
 ### 2.2文章每个词的先验概率（最大似然——特征x和类别y，在训练中出现的次数）
 
-- 2.2.1 求出每类文章所有词语出现的次数
+- 2.2.1 求出各类文章所有词语出现的次数
 
-	遍历classDic[文章类型][词语id]——词语id对应的出现次数word_id_count
+	遍历<font color='blue'>classDic[文章类型][词语id]</font>——获取各个词语id对应的出现次数word_id_count，相加即可得总词数
 
-	 对P类文章 wordSumP = 10+5...
+	对P类文章 wordSumP = 10+5...
 
 	对F类文章 wordSumF = 6+7...
 
-- 2.2.2 求出每类文章每个词语的先验概率
+	换言之，统计各类文章的总词数。比如：“苹果 手机 和 苹果 电脑”的wordSum=6
+
+- 2.2.2 求出各类文章每个词语的先验概率
 
 	word_id_count/wordSum
 
 	对P类文章 P(xj|yi)=word_id_count/wordSumP
 
 	对F类文章 P(xj|yi)=word_id_count/wordSumF
+	
+	比如：“苹果 手机 和 苹果 电脑”P(苹果|科技)=2/6
 
 ### 3.记录文章类型、文章先验概率、词语id、词语先验概率(最大似然)（空格分隔）
 
-P类 P(yp) F类 P(yf) ...
+P类 P(yp) F类 P(yf) ...(P类文章 P类文章先验概率 F类文章 F类文章先验概率...)
 	
-P类 word_1 p(x1|yp) word_2 p(x1|yp)...
+P类 word_id_1 p(x1|yp) word_id_2 p(x1|yp)...(P类文章 词语1 词语1先验概率 词语2 词语2先验概率...)
 
-P类 word_5 p(x5|yf) word_11 p(x11|yf)...
+F类 word_id_5 p(x5|yf) word_id_11 p(x11|yf)...(F类文章 词语5 词语5先验概率 词语11 词语11先验概率...)
 
 # <font color=red>三、测试算法（评估模型）</font>
 
@@ -132,6 +140,8 @@ P类 word_5 p(x5|yf) word_11 p(x11|yf)...
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200627233216232.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FsYmVydExpYW5nenQ=,size_16,color_FFFFFF,t_70)
 
 ## 5.代入各个类型求解，取出最大值
+
+最大概率所对应的类型，就是预测类型
 
 ## 6.同理，求出所有预测结果，与原有类型进行比较
 
